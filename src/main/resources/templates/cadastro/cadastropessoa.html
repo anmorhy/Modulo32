@@ -20,7 +20,7 @@
     <h4>Spring Boot + Thymeleaf + Material Design </h4>
     <h2>Cadastro de Pessoas</h2>
     <div class="row">
-        <form action="salvarpessoa" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12">
+        <form th:action="@{/salvarpessoa}" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12">
             <div>
                 <div class="input-fiel col s6">
                     <label for="id" class="active">ID</label>
@@ -53,7 +53,7 @@
     <br/>
     <br/>
     <div class="row">
-        <form action = "pesquisarpessoa" method="post" class="col s12">
+        <form th:action="@{/pesquisarpessoa}" method="post" class="col s12">
             <div class="row">
                 <div class="input-field col s12">
                     <label for="nomepesquisa" class="active">Pesquisa por nome:</label>
@@ -77,9 +77,10 @@
                 <th>Remover</th>
             </tr>
         </thead>
+        <!-- nao funciona editar nem telefones get mapping com erro  -->
         <tr th:each = "pessoa : ${pessoas}">
             <td th:text = "${pessoa.id}"></td>
-            <td th:text = "${pessoa.nome}"></td>
+            <td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><spa th:text = "${pessoa.nome}"></spa></a></td>
             <td th:text = "${pessoa.sobrenome}"></td>
             <td th:text = "${pessoa.idade}"></td>
             <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
